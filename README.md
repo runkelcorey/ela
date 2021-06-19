@@ -14,14 +14,13 @@ To remove those bits, I follow [Mourmouras](https://web.archive.org/web/20210128
 In this case, I subtract the median line 6 amount of the 24 monthly financial statements from August 2009 to July 2011.
 
 To retrieve line 6 data, I scraped Bank of Greece's monthly balance sheets.
-Formatting the whole balance sheet was not much harder than formatting line 6, so this repo also makes the entirety of those balance sheets available in a tidy format.
+Formatting the whole balance sheet was not much harder than formatting line 6, so this repo also makes every non-December balance sheet from January 2002 to May 2021 available in a tidy format.^[Not included are March and August 2003. The files for these months are scanned paper copies, not native PDFs.]
 Let us pray the Bank of Greece does not reformat their financial statements anytime soon.
 
 ### next steps
 
 * subtract/interpolate estimate of non-ELA line 6 and Sundry amounts
-* make available the entire BOG balance sheet
-  + stable composition (numbered by line)
-  + changing composition
+* add ability to get December balance sheets
+* formalize function
 
 ![Outstanding liquidity from the Bank of Greece to Eurosystem institutions. This mostly means Greek banks.](ela_outstanding.png)
