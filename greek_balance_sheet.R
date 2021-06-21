@@ -1,10 +1,18 @@
-###Fetch and tabularize Bank of Greece PDF financial statements
-###Corey Runkel
+#' Fetch and tabularize Bank of Greece monthly financial statements
+#'
+#' @param accounting_period An object coercible to a date no earlier than
+#' 2002-01-01, or a two-object vector specifying start and end dates.
+#' @param composition One of "changing" or "constant".
+#' @return A tibble representing one or more tidy balance sheets.
+#' @examples
+#' greek_balance_sheet(c("2011-08-01", "2012-12-01"), "changing")
+#' @details Does not include December 2002, March 2003, or August 2003
+#' due to their structures. Constant composition removes subline items
+#' and relabels lines to account for the Items in settlement line in December
+#' accounts.
 
-get_balance_sheet <- function(accounting_period = Sys.Date()-30, #an object that can be coerced to a date no earlier than 2002-01-01
-                                                                ##OR a two-item vector of such objects specifying start and end dates
-                              composition = c("changing", "constant")) { #balance sheet sublines change from month-to-month, with a few regulars;
-                                                                        ##if you want sublines, choose "changing"; for totals, choose "constant"
+greek_balance_sheet <- function(accounting_period = Sys.Date()-50,
+                              composition = c("changing", "constant")) {
   ###Setup#############################################
   #depends
   #library(pdftools)
@@ -87,7 +95,7 @@ get_balance_sheet <- function(accounting_period = Sys.Date()-30, #an object that
 
 
     ###Function#########################################
-    map_df(accounting_periods[!grepl("2002\\-12|2002\\-11\\-01|2003\\-0(5|8)\\-01", accounting_periods)], ~ get_balance_sheet(.x, composition = composition)) %>%
+    map_df(accounting_periods[!grepl("2002\\-12|2002\\-11\\-01|2003\\-0(5|8)\\-01", accounting_periods)], ~ greek_balance_sheet(.x, composition = composition)) %>%
       return()
   }
 }
