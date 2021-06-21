@@ -17,9 +17,9 @@ To retrieve line 6 data, I scraped Bank of Greece's monthly balance sheets.
 Formatting the whole balance sheet was not much harder than formatting line 6, so this repo also makes available every balance sheet from January 2002 to May 2021 available in a tidy format.^[Not included are December 2002, March 2003, and August 2003. The structure of December 2002 differs from all other balance sheets, and other PDFs are scanned paper copies, not native PDFs.]
 Let us pray the Bank of Greece does not reformat their financial statements anytime soon.
 
+![Bank of Greece balance sheet, 2002-2021](balance_sheet.png)
+
 ### next steps
 
 * subtract/interpolate estimate of non-ELA line 6 and Sundry amounts
-* formalize function
-
-![Bank of Greece balance sheet, 2002-2021](balance_sheet.png)
+* formalize and document function

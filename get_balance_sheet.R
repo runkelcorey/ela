@@ -1,7 +1,10 @@
 ###Fetch and tabularize Bank of Greece PDF financial statements
 ###Corey Runkel
 
-get_balance_sheet <- function(accounting_period = Sys.Date()-30, composition = c("changing", "constant")) {
+get_balance_sheet <- function(accounting_period = Sys.Date()-30, #an object that can be coerced to a date no earlier than 2002-01-01
+                                                                ##OR a two-item vector of such objects specifying start and end dates
+                              composition = c("changing", "constant")) { #balance sheet sublines change from month-to-month, with a few regulars;
+                                                                        ##if you want sublines, choose "changing"; for totals, choose "constant"
   ###Setup#############################################
   #depends
   #library(pdftools)
