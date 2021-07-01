@@ -23,8 +23,13 @@ ela <- bog_fa %>%
                                       grepl("[Ss]undry", item) & (crisis == FALSE | accounting_period > as_date("2012-04-15")) ~ "Sundry")))
 
 ###Plot#########################
-ggplot(ela) +
-  geom_col(aes(accounting_period, amount, fill = line)) +
+ela %>%
+  complete(accounting_period, line) %>% #make missing lines into NAs
+  mutate(amount = replace_na(amount, 0)) %>% #make NAs into 0s
+  filter(between(accounting_period, as_date("2011-01-01"), as_date("2019-12-31"))) %>%
+  ggplot() +
+  geom_area(aes(accounting_period, amount, fill = line)) +
   scale_x_date(date_labels = "%Y", date_breaks = "1 year") +
   scale_y_continuous(labels = scales::dollar_format(scale = 1/1000000000, prefix = "€")) +
-  labs(x = "Month", y = "Outstanding liquidity (billions)", title = "Outstanding liquidity from the Bank of Greece to Eurosystem credit institutions", fill = "Type", caption = "Note: The median non-ELA Sundry amount was €2.2 million and Line 6 amount was €1.5 billion.")
+  labs(x = "Month", y = "Outstanding liquidity (billions)", fill = "Source") + #Note: The median non-ELA Sundry amount was €2.2 million and Line 6 amount was €1.5 billion.
+  theme(legend.position = "bottom")
