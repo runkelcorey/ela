@@ -35,5 +35,12 @@ vignettes/*.pdf
 *.utf8.md
 *.knit.md
 
+# R Markdown files specific to YPFS
+*.Rmd
+*.html
+
+# FRED API key
+fred_key.Rds
+
 # R Environment Variables
 .Renviron
